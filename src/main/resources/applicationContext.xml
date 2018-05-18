@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:config.properties" />
+
+    <bean id="myNitherlandsTour" class="by.tsai2.ilya2.springhomework.bean.Tour">
+        <property name="nameTour" value="${foo.nameTour}" />
+        <property name="country" value="${foo.country}" />
+        <property name="nameHotel" value="${foo.nameHotel}" />
+        <property name="amountStarsHotel" value="${foo.amountStarsHotel}" />
+        <property name="price" value="${foo.price}" />
+        <property name="amountDaysTour" value="${foo.amountDaysTour}" />
+        <property name="citiesToVisit">
+            <list>
+                <value>${foo.cityFirst}</value>
+                <value>${foo.citySecond}</value>
+
+            </list>
+        </property>
+    </bean>
+
+    <bean id="myBelarusTour" class="by.tsai2.ilya2.springhomework.bean.Tour">
+        <property name="nameTour" value="Dream tour" />
+        <property name="country" value="Belarus" />
+        <property name="nameHotel" value="Sputnik" />
+        <property name="amountStarsHotel" value="5" />
+        <property name="price" value="40.0" />
+        <property name="amountDaysTour" value="7" />
+        <property name="citiesToVisit">
+            <list>
+                <value>Minsk</value>
+                <value>Vitebsk</value>
+                <value>Grodno</value>
+                <value>Brest</value>
+                <value>Gomel</value>
+                <value>Mogilev</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="tourDao" class="by.tsai2.ilya2.springhomework.dao.impl.SQLTourDao"></bean>
+
+    <bean id="finderTourService" class="by.tsai2.ilya2.springhomework.service.impl.FinderTourServiceImpl">
+        <constructor-arg ref="tourDao"></constructor-arg>
+        <property name="td" ref="tourDao" />
+    </bean>
+</beans>
